@@ -39,6 +39,7 @@ VertexList Graph::edges_from(Vertex vertex) const {
         if (e.u == vertex) neighbors.push_back(e.v);
         else if (e.v == vertex) neighbors.push_back(e.u);
     }
+    sort(neighbors.begin(), neighbors.end());
     return neighbors;
 }
 
@@ -62,13 +63,13 @@ void error(string msg) {
     cerr << msg << endl;
 }
 
-int sum_weights(EdgeList const& L) { 
+int sum_weights(EdgeList const& L) {
     int total = 0;
-    for (const Edge& e : L) {
+    for (const Edge& e : L)
         total += e.weight;
-    }
-    return total / 2;
+    return total;
 }
+
 
 VertexList dfs(const Graph& graph, Vertex startVertex) { 
     vector<Vertex> result;
