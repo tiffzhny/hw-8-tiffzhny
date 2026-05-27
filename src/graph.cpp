@@ -40,6 +40,8 @@ VertexList Graph::edges_from(Vertex vertex) const {
         else if (e.v == vertex) neighbors.push_back(e.u);
     }
     sort(neighbors.begin(), neighbors.end());
+    auto last = unique(neighbors.begin(), neighbors.end());
+    neighbors.erase(last, neighbors.end());
     return neighbors;
 }
 
@@ -51,13 +53,13 @@ EdgeList Kruskals(const Graph& G) {
 
     for (const Edge& e : sorted) {
         if (ds.findSet(e.u) != ds.findSet(e.v)) {
-            F.push_back(Edge{e.u, e.v, e.weight});
-            F.push_back(Edge{e.v, e.u, e.weight});
+            F.push_back({e.u, e.v, e.weight});
             ds.unionSets(e.u, e.v);
         }
     }
     return F;
 }
+
 
 void error(string msg) {
     cerr << msg << endl;
