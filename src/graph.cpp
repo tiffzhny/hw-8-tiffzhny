@@ -37,11 +37,8 @@ VertexList Graph::edges_from(Vertex vertex) const {
     VertexList neighbors;
     for (const Edge& e : *this) {
         if (e.u == vertex) neighbors.push_back(e.v);
-        else if (e.v == vertex) neighbors.push_back(e.u);
     }
     sort(neighbors.begin(), neighbors.end());
-    auto last = unique(neighbors.begin(), neighbors.end());
-    neighbors.erase(last, neighbors.end());
     return neighbors;
 }
 
